@@ -1,0 +1,62 @@
+[
+  {
+    "id": "kb-001",
+    "title": "Resetting your password",
+    "body": "If you're locked out of your CloudSync account, go to the login page and click 'Forgot password'. Enter the email address on your account and we'll send a reset link that's valid for 60 minutes. If the email doesn't arrive within a few minutes, check spam/junk folders, and confirm you're using the same email your account was created with. Password reset links only work once.",
+    "tags": ["account", "login", "password"]
+  },
+  {
+    "id": "kb-002",
+    "title": "Files stuck 'syncing' and not uploading",
+    "body": "A file stuck in 'syncing' state usually means one of: (1) the file is open in another program and locked, (2) it exceeds the 5GB single-file limit on the current plan, (3) local disk space is low, or (4) the sync client lost its connection. Ask the customer to close the file, check available disk space, and restart the CloudSync client (right-click the tray icon > Restart Sync). If it's still stuck after a restart, have them check Settings > Sync Log for an error code and share it with us.",
+    "tags": ["sync", "upload", "bug"]
+  },
+  {
+    "id": "kb-003",
+    "title": "Upgrading or downgrading a plan",
+    "body": "Plan changes are self-serve under Account > Billing > Change Plan. Upgrades take effect immediately and are prorated for the current billing cycle. Downgrades take effect at the start of the next billing cycle so the customer keeps their current storage until then. If a downgrade would put the customer over their new storage limit, they'll need to delete or archive files first -- CloudSync will not auto-delete anything.",
+    "tags": ["billing", "plan", "upgrade", "downgrade"]
+  },
+  {
+    "id": "kb-004",
+    "title": "Requesting a refund",
+    "body": "We offer a full refund within 14 days of any charge, no questions asked -- this covers both first-time purchases and renewals. Refunds outside the 14-day window are evaluated case by case (e.g. accidental double-charge, service outage during the billing period). Refunds are issued to the original payment method and typically appear within 5-10 business days depending on the customer's bank.",
+    "tags": ["billing", "refund"]
+  },
+  {
+    "id": "kb-005",
+    "title": "Sharing a folder with external collaborators",
+    "body": "To share a folder, right-click it and choose 'Share' > 'Invite people'. External collaborators (people without a CloudSync account) can be invited by email and will get view or edit access without needing to sign up, unless the workspace admin has restricted external sharing under Admin > Security. Shared folder links can be set to expire after a chosen number of days.",
+    "tags": ["sharing", "collaboration"]
+  },
+  {
+    "id": "kb-006",
+    "title": "Two-factor authentication (2FA) setup and recovery",
+    "body": "2FA can be enabled under Account > Security > Two-Factor Authentication using an authenticator app (TOTP). If a customer is locked out because they lost their authenticator device, we can disable 2FA after verifying identity via the account's registered email and, for business plans, the workspace admin. Never disable 2FA based on a support ticket alone without identity verification -- this is a common social-engineering target.",
+    "tags": ["account", "security", "2fa"]
+  },
+  {
+    "id": "kb-007",
+    "title": "Data retention after account cancellation",
+    "body": "When an account is cancelled, files are retained for 30 days in a recoverable state in case the customer changes their mind or cancelled by mistake. After 30 days, files are permanently deleted and cannot be recovered. Customers who want their data preserved longer should export it before cancelling, via Account > Export Data.",
+    "tags": ["billing", "cancellation", "data"]
+  },
+  {
+    "id": "kb-008",
+    "title": "Sync conflicts and duplicate 'conflicted copy' files",
+    "body": "When the same file is edited on two devices before syncing, CloudSync keeps both versions and renames one to '<filename> (conflicted copy, <device>, <date>).ext' so no work is lost. The customer should open both versions, merge any changes manually, and delete the one they don't need. This is expected behavior, not a bug -- explain it plainly since it often looks alarming to customers.",
+    "tags": ["sync", "conflict"]
+  },
+  {
+    "id": "kb-009",
+    "title": "Mobile app not showing recently uploaded files",
+    "body": "The mobile app caches the file list and refreshes on a pull-to-refresh gesture or when reopened after being backgrounded for a while. If files still don't appear after a manual refresh, check that the mobile app is signed into the same account/workspace as the desktop client, and that background app refresh is enabled in the phone's OS settings.",
+    "tags": ["mobile", "sync", "bug"]
+  },
+  {
+    "id": "kb-010",
+    "title": "Exceeding storage limit",
+    "body": "When a customer exceeds their plan's storage limit, new files stop syncing but existing files remain safe and accessible -- nothing is deleted. They can free up space by deleting files, emptying the CloudSync trash (Account > Trash), or upgrading their plan. Point out that emptying trash is permanent after 30 days per our retention policy.",
+    "tags": ["billing", "storage"]
+  }
+]

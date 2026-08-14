@@ -1,0 +1,50 @@
+[
+  {
+    "id": "t-1001",
+    "customer_message": "hey my files have been stuck on 'syncing' for like 2 hours now and its really annoying, i need them for a meeting in an hour!!",
+    "agent_reply": "Hi there, I completely understand the urgency -- let's get this sorted before your meeting. Could you try right-clicking the CloudSync tray icon and choosing 'Restart Sync'? That clears the most common cause of a stuck sync. If it's still stuck after that, open Settings > Sync Log and let me know if you see an error code there, and I'll dig in right away.",
+    "tags": ["sync", "urgent"]
+  },
+  {
+    "id": "t-1002",
+    "customer_message": "I was charged twice this month, can I get one of those refunded?",
+    "agent_reply": "Sorry about that, and thanks for flagging it. I can see the duplicate charge on your account -- I've gone ahead and refunded the extra charge to your original payment method. It should appear back on your statement within 5-10 business days. Let me know if it doesn't show up by then and I'll follow up with our payments team directly.",
+    "tags": ["billing", "refund"]
+  },
+  {
+    "id": "t-1003",
+    "customer_message": "why do I have a bunch of weird files called 'report (conflicted copy...)' in my folder now, did something break??",
+    "agent_reply": "Good news -- nothing's broken! Those 'conflicted copy' files show up when the same file gets edited on two devices before they've had a chance to sync with each other. Rather than overwrite anyone's work, CloudSync keeps both versions and renames one so you don't lose anything. Take a look at both copies, keep whichever changes you want, and delete the one you don't need. Happy to help you compare them if you'd like.",
+    "tags": ["sync", "conflict"]
+  },
+  {
+    "id": "t-1004",
+    "customer_message": "lost my phone with my authenticator app on it, now I can't log in because of 2FA. please just turn it off",
+    "agent_reply": "Sorry to hear about your phone -- let's get you back in safely. Since this involves account security, I'll need to verify your identity first: can you confirm the email address on the account and reply from that inbox? Once that's confirmed, I can disable 2FA so you can log back in and set it up again on a new device.",
+    "tags": ["account", "2fa", "security"]
+  },
+  {
+    "id": "t-1005",
+    "customer_message": "cancelled my plan by accident last week, are my files gone?",
+    "agent_reply": "No need to worry -- your files are safe. We keep everything in a recoverable state for 30 days after cancellation specifically for situations like this. I can reactivate your plan right now if you'd like your files and account back exactly as they were -- just confirm and I'll take care of it.",
+    "tags": ["billing", "cancellation"]
+  },
+  {
+    "id": "t-1006",
+    "customer_message": "uploaded a 6gb video and it just won't sync, no error or anything, just sits there",
+    "agent_reply": "That'll do it -- your current plan has a 5GB limit per file, so anything larger won't sync (unfortunately without a clear error, which we're working on improving). A couple of options: split the file, compress it, or upgrade to a plan with a higher per-file limit if you're regularly working with large video files. Let me know which direction you'd like to go and I can help.",
+    "tags": ["sync", "storage", "billing"]
+  },
+  {
+    "id": "t-1007",
+    "customer_message": "can I share a folder with someone who doesn't have CloudSync? they're a contractor, not on our team",
+    "agent_reply": "Yes, that works fine -- right-click the folder, choose Share > Invite people, and enter their email. They'll get access without needing to create a CloudSync account, unless your workspace admin has external sharing turned off. If you'd like, you can also set the link to expire after their contract ends so access closes automatically.",
+    "tags": ["sharing", "collaboration"]
+  },
+  {
+    "id": "t-1008",
+    "customer_message": "my phone app isnt showing the files I just added from my laptop",
+    "agent_reply": "That's usually just the mobile app's cache -- try pulling down on the file list to refresh, or fully closing and reopening the app. Also worth double-checking the phone is signed into the same workspace as your laptop. If the files still don't show up after that, let me know and we'll look closer.",
+    "tags": ["mobile", "sync"]
+  }
+]

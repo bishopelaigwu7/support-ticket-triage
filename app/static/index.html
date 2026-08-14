@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Support Copilot</title>
+<link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>Support Copilot</h1>
+      <p class="subtitle">Paste a customer ticket. Get a grounded draft reply, sources, and triage tags in seconds. A human always reviews before sending.</p>
+    </header>
+
+    <main>
+      <section class="panel">
+        <label for="ticket">Customer ticket</label>
+        <textarea id="ticket" rows="6" placeholder="e.g. my files have been stuck on 'syncing' for 2 hours and I need them for a meeting"></textarea>
+
+        <div class="controls">
+          <div class="tone-field">
+            <label for="tone">Tone</label>
+            <select id="tone">
+              <option value="default">Default (match past replies)</option>
+              <option value="formal">More formal</option>
+              <option value="casual">More casual</option>
+            </select>
+          </div>
+          <button id="draftBtn">Generate draft</button>
+        </div>
+        <p id="error" class="error"></p>
+      </section>
+
+      <section class="panel result" id="result" hidden>
+        <div class="tags" id="tags"></div>
+
+        <label>Draft reply</label>
+        <textarea id="draftOutput" rows="8"></textarea>
+        <button id="copyBtn" class="secondary">Copy to clipboard</button>
+
+        <div class="notes" id="notes"></div>
+
+        <label>Grounded in</label>
+        <ul id="sources"></ul>
+      </section>
+
+      <section class="panel loading" id="loading" hidden>
+        <p>Drafting…</p>
+      </section>
+    </main>
+
+    <footer>
+      <p>Demo data only — a fictional product ("CloudSync"). No real customer data is used. <a href="https://github.com/" target="_blank" rel="noopener">View source on GitHub</a></p>
+    </footer>
+  </div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
