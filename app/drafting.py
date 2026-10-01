@@ -53,6 +53,23 @@ retrieved context didn't cover"
 
 @dataclass
 class DraftResult:
+    """Structured result of a drafting call.
+
+    Mirrors the JSON shape the model is instructed to return (see
+    SYSTEM_PROMPT above), with safe defaults so a partially-parsed or
+    malformed model response still produces a usable object instead of
+    raising.
+
+    Attributes:
+        draft_reply: The drafted reply text for an agent to review.
+        sources_used: IDs of retrieved documents the model says it drew on.
+        category: One of billing | sync | account | sharing | mobile | other.
+        urgency: One of low | medium | high.
+        sentiment: One of positive | neutral | frustrated | angry.
+        notes_for_agent: Anything the agent should double-check, or context
+            the knowledge base didn't cover.
+    """
+
     draft_reply: str
     sources_used: list = field(default_factory=list)
     category: str = "other"
@@ -62,7 +79,20 @@ class DraftResult:
 
 
 def _strip_markdown_fence(text: str) -> str:
-    """Some models wrap JSON in ```json ... ``` even when told not to. Strip it."""
+    """Remove a surrounding ```json ... ``` (or plain ``` ... ```) fence.
+
+    Some models wrap JSON output in a markdown code fence even when told
+    not to. This strips it so the remaining text can be passed straight to
+    json.loads without raising on the fence markers.
+
+    Args:
+        text: Raw text returned by the model.
+
+    Returns:
+        str: The text with a leading/trailing markdown fence removed, if
+        one was present. Text with no fence is returned unchanged
+        (aside from surrounding whitespace being trimmed).
+    """
     stripped = text.strip()
     if stripped.startswith("```"):
         stripped = stripped.split("\n", 1)[1] if "\n" in stripped else stripped
@@ -72,6 +102,22 @@ def _strip_markdown_fence(text: str) -> str:
 
 
 def _build_context_block(retrieved_docs: list) -> str:
+    """Render retrieved knowledge-base articles / past tickets as plain text.
+
+    Formats each retrieved document into a labeled block the model can cite
+    by ID in its response (see SYSTEM_PROMPT's "sources_used" instruction).
+
+    Args:
+        retrieved_docs: Documents returned by
+            app.retrieval.RetrievalIndex.search(), each a dict with at
+            least "source_type" and "raw" keys.
+
+    Returns:
+        str: A newline-separated block of formatted documents, ready to
+        drop into the user prompt. Returns a plain "no results" sentence
+        if retrieved_docs is empty, so the model is told explicitly rather
+        than silently prompted with nothing.
+    """
     if not retrieved_docs:
         return "No relevant knowledge-base articles or past tickets were found."
 
@@ -93,7 +139,30 @@ def _build_context_block(retrieved_docs: list) -> str:
 
 
 def draft_reply(ticket_text: str, retrieved_docs: list, tone: str = "default") -> DraftResult:
-    """Call Claude to draft a reply grounded in retrieved_docs."""
+    """Call Claude to draft a reply to a customer ticket, grounded in retrieved_docs.
+
+    Builds a single prompt containing the ticket text, the formatted
+    retrieved context, and an optional tone instruction, then asks the
+    model for the JSON-shaped response described in SYSTEM_PROMPT.
+
+    Args:
+        ticket_text: The raw customer message to draft a reply for.
+        retrieved_docs: Knowledge-base articles / past tickets from
+            app.retrieval.RetrievalIndex.search() to ground the reply in.
+        tone: Reply register to request. One of "default", "formal", or
+            "casual"; any other value is treated as "default" (no extra
+            instruction added).
+
+    Returns:
+        DraftResult: The drafted reply and triage metadata. If the model's
+        response isn't valid JSON, returns a DraftResult with the raw model
+        text as draft_reply and a note flagging the parse failure, rather
+        than raising, so callers always get a usable object back.
+
+    Raises:
+        RuntimeError: If the ANTHROPIC_API_KEY environment variable is not
+            set.
+    """
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:
         raise RuntimeError(
